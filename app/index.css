@@ -52,7 +52,7 @@ li {
 }
 
 .avatar {
-    width: 150px;
+    width: 50px;
     border-radius: 50%;
 }
 
@@ -63,4 +63,8 @@ li {
 
 .paginator {
     cursor: pointer;
+}
+
+.bolded{
+    font-weight: bold;
 }

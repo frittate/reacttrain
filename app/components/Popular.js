@@ -55,7 +55,7 @@ function RepoGrid (props) {
         return (
           <li key={repo.name} className='popular-item'>
             <div className='popular-rank'>#{index + 1}</div>
-            <ul className='space-list-items'><a href={repo.html_url}>
+            <ul className='space-list-items'><a href={repo.html_url} target='_blank'>
               <li>
                 <img
                   className='avatar'
@@ -63,7 +63,7 @@ function RepoGrid (props) {
                   alt={'Avatar for ' + repo.owner.login}
                 />
               </li>
-              <li>{repo.name}</li>
+              <li className='bolded'>{repo.name}</li>
               <li>@{repo.owner.login}</li>
               <li>{repo.stargazers_count} stars</li></a>
             </ul>
