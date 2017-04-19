@@ -50,3 +50,7 @@ li {
     font-size: 12px;
     margin: 10px;
 }
+
+.paginator {
+    cursor: pointer;
+}
