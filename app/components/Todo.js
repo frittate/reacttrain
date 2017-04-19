@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var PropTypes = require('prop-types');
-var api = require('../utils/api');
+//var api = require('../utils/api');
 
 function SelectLanguage (props){ //stateless functional component: a component written as a function without any state, so state > UI, without render()
         var languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
@@ -74,16 +74,11 @@ function RepoGrid (props) {
   )
 }
 
-
-
-
-class Popular extends React.Component{
+class Todo extends React.Component{
     constructor (props){ //establish initial state, available through this.state
             super(props);
             this.state = {
-                selectedLanguage: 'All',
-                repos: null,
-                perPage: 10,
+                name: 'string',
             }
             this.updateLanguage = this.updateLanguage.bind(this);
             this.updatePerPage = this.updatePerPage.bind(this); //always bind the this from the invoked context to the this.updateLanguage function
@@ -95,61 +90,15 @@ class Popular extends React.Component{
         this.updatePerPage(this.state.perPage);
     }    
 
-    updateLanguage(lang){
-        this.setState(function () {
-            return {
-                selectedLanguage: lang,
-                repos: null,
-            }
-        });
-
-    api.fetchPopularRepos(lang, this.state.perPage)
-      .then(function (repos) {
-        this.setState(function () {
-          return {
-            repos: repos,
-          }
-        });
-      }.bind(this));
-    }
-
-    updatePerPage(page){
-        this.setState(function(){
-            return {
-                perPage: page,
-                repos: null,
-            }
-        });
-    
-    api.fetchPopularRepos(this.state.selectedLanguage, page)
-      .then(function (repos) {
-        this.setState(function () {
-          return {
-            repos: repos,
-          }
-        });
-      }.bind(this));
-    }
-
-
     render(){
         return(
-            
-            <div>
-                <Page 
-                perPage={this.state.perPage}
-                onSelect={this.updatePerPage} />
-
-                <SelectLanguage
-                selectedLanguage={this.state.selectedLanguage}
-                onSelect={this.updateLanguage} /> 
-
-                {!this.state.repos
-                ? <p>LOADING!</p>
-                : <RepoGrid repos={this.state.repos} />}
-            </div>
+          <div></div>  
         )
     }
 }
 
-module.exports = Popular;
+module.exports = Todo;
+
+
+//
+
