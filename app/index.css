@@ -7,8 +7,16 @@ body {
     margin: 0 auto;
 }
 
+ul > a{
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
 ul {
     padding: 0;
+    
 }
 
 li {
@@ -34,19 +42,29 @@ li {
 
 .popular-item {
     margin: 20px;
+    padding: 5px;
     text-align: center;
 }
+
 
 .space-list-items {
     margin-bottom: 7px;
 }
 
 .avatar {
-    width: 150px;
+    width: 50px;
     border-radius: 50%;
 }
 
 .popular-rank {
     font-size: 12px;
     margin: 10px;
+}
+
+.paginator {
+    cursor: pointer;
+}
+
+.bolded{
+    font-weight: bold;
 }
