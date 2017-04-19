@@ -7,8 +7,16 @@ body {
     margin: 0 auto;
 }
 
+ul > a{
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
 ul {
     padding: 0;
+    
 }
 
 li {
@@ -34,8 +42,10 @@ li {
 
 .popular-item {
     margin: 20px;
+    padding: 5px;
     text-align: center;
 }
+
 
 .space-list-items {
     margin-bottom: 7px;
