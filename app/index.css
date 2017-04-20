@@ -7,11 +7,11 @@ body {
     margin: 0 auto;
 }
 
-ul > a{
+ul a{
     color: #000000;
     text-decoration: none;
     cursor: pointer;
-
+    display: block;
 }
 
 ul {
@@ -44,6 +44,12 @@ li {
     margin: 20px;
     padding: 5px;
     text-align: center;
+    border: 1px solid #eeeeee;
+    transition: all .5s ease;
+}
+
+.popular-item:hover{
+    background-color: whitesmoke;
 }
 
 
