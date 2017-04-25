@@ -1,0 +1,96 @@
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Roboto, sans-serif;
+
+}
+
+.eventForm{
+    width: 700px;
+    border: 1px solid #DBDBDB;
+    padding: 10px;
+}
+
+.btn {
+    width: 150px;
+    height: 150px;
+    border-radius: 4px;
+}
+.btn-add {
+    border: 2px dotted grey;
+    cursor: pointer;
+    background: whitesmoke;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.btn-view {
+    border: 2px solid dodgerblue;
+    cursor: pointer;
+    background: lightblue;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.btn-submit {
+    border: 1px solid transparent;
+    background: transparent;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: thin;
+    padding: 5px;
+    margin-left: 10px;
+    color: white;
+}
+
+.formInputField {
+    margin: 10px;
+    margin-bottom: 25px;
+
+}
+
+.radioInput{
+    padding: 2px;
+    font-weight: thin;
+    font-size: 14px;
+    margin: 5px;
+}
+
+.textInput, .numberInput{
+    width: 75%;
+    height: 24px;
+    border: 2px solid transparent;
+    border-bottom: 2px solid red;
+    padding: 2px;
+    font-weight: thin;
+    font-size: 14px;
+    display: block;
+    background: transparent;
+    margin-left: 5px;
+}
+
+.half-width{
+    width: 48%;
+}
+
+.textInput:focus{
+    font-weight: bold;
+}
+
+label {
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+.head{
+    background: #FF5252;
+    color: white;
+    margin: -10px;
+    padding-bottom: 10px;
+}
