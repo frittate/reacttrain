@@ -7,6 +7,7 @@ class EventView extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            visible: 'overview',
             name: '',
             type: 'bestellen',
             cost: 2,
@@ -24,7 +25,21 @@ class EventView extends React.Component{
         this.handleTimeChange = this.handleTimeChange.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onDetail = this.onDetail.bind(this);
+    }
 
+    onSubmit(event){
+        event.preventDefault();
+         this.setState({
+            visible: 'overview',
+        })
+    }
+
+    onDetail(){
+        this.setState({
+            visible: 'detail',
+        })
     }
 
     handleChange(event){
@@ -34,6 +49,7 @@ class EventView extends React.Component{
         this.setState({
             [name]: value,
         });
+        
     }
 
     handleTimeChange(date){
@@ -57,16 +73,20 @@ class EventView extends React.Component{
     }
 
     render(){
+        if (this.state.visible === 'detail'){
         return(
             <div className="home-container">
+                <div className='headerOverflow'>
                 {this.state.img ? 
                 <img src={this.state.img} alt='testimage' className='headerImage' /> : null}
-                <form className='eventForm'>
+                </div>
+                <form className='eventForm' onSubmit={this.onSubmit}>
                     <div className="head">
-                        <input type='submit' defaultValue='Erstellen' className='btn-submit' />
+                        <input type='submit' defaultValue='Erstellen' className='btn-submit'/>
                         <Name 
                         handleChange={this.handleChange}
-                        value={this.state.name}/>
+                        value={this.state.name}
+                        />
                     </div>
                     
                     <Time 
@@ -101,19 +121,34 @@ class EventView extends React.Component{
                 </form>
             </div>
            
-        )}
+        ) } else {
+            return(
+                <div className='eventTile'>
+                    {this.state.img ? 
+                    <img src={this.state.img} alt='testimage' className='viewImage' /> : null}
+
+                    <p>{this.state.name}</p>
+                    <p>{this.state.startDate.format('DD. MMM')}</p>
+                    <button onClick={this.onDetail}>Details anzeigen</button>
+                </div>
+            )
+        }
+}
 }
 
 function Name(props){
     return(
         <div className='formInputField'>
-            <label>Gib deinem Event einen Namen</label><br />
+            <label>Gib deinem Event einen Namen</label>
             <input type='text'
             name='name'
             className='textInput'
             value={props.value}
             onChange={props.handleChange} 
             />
+            <span className='bar'></span>
+            <br />
+            
         </div>
     )
 }

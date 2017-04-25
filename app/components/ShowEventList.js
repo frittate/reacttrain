@@ -1,60 +1,37 @@
 var React = require('react');
 var Link = require('react-router-dom').Link;
-var EventTile = require('./EventTile');
+var EventView = require('./EventView');
 
-let eventList = {
-    events: [],
-
-    addEvent: function(){
-        this.events.push({
-            name: 'name',
-            type: [1,2],
-        })
-    },
-
-}
-
-class ShowEventList extends React.Component {
+class ShowEventList extends React.Component {    
     constructor(props){
         super(props);
         this.state = {
-            test: 'test'
+            events: [1],
+        } 
+        this.onAdd = this.onAdd.bind(this);     
+    }
+
+    onAdd(){
+            this.setState({
+                events: this.state.events.push(this.state.events.length+1)
+            })
+            console.log(this.state.events);
         }
 
-        this.addItem = this.addItem.bind(this);
-    }
-
-    addItem(){
-        this.setState(function(){
-            this.state.events.push(this.state.events.length+1);
-        })
-    }
-
-
-    render(){
-        console.log(this.state.events);
-        return(
-            
-            <div>
-                <div>
-                    <h2>event overview</h2>
-                </div>
-                <div>
-                    
-                    {this.state.events.map(function(id){
-                        return(
-                        <EventTile 
-                        id={id}
-                        key={id}
-                        />
-                        )
-                    }, this)}
-
-                    <button className="btn btn-add" onClick={this.addItem}>Add New Event</button>
-                </div>
-            </div>
-        )
-    }
+ render(){
+     return(
+         <div>
+             {this.state.events.map(function(eventId){
+                 return (
+                 <EventView key={eventId} />
+                 )
+             })}
+             <div>
+                <button className='btn btn-add' onClick={this.onAdd}>Add new</button>
+             </div>
+        </div>
+    )
+ }
 }
 
 module.exports = ShowEventList;

@@ -9,28 +9,16 @@ var ShowEventList = require('./ShowEventList');
 var EventView = require('./EventView');
 import 'react-datepicker/dist/react-datepicker.css';
 
-class App extends React.Component {
-  constructor(props){
-    super(props);
-    this.onChange = this.onChange.bind(this); 
-  }
-  
-  onChange(value){
-    console.log(value);
-  }
-
-  render() {
-    console.log(EventView);
+function App(props){
     return (
       <Router>
         <div className='container'>
             <div className='home-container'>
-                <h1>Pizza Master Chef Order System </h1>
-                
+                <h1>Pizza Master Chef Order System </h1>            
             </div>
 
           <Switch>
-            <Route exact path='/' component={EventView} onChange={this.onChange} />
+            <Route exact path='/' component={EventView} />
             <Route exact path='/list' component={ShowEventList} />
             <Route path ='/new' component={Home} />
             <Route render={function(){
@@ -39,9 +27,9 @@ class App extends React.Component {
             </Switch>
         </div>
     </Router>
+    
     )
   }
-}
 
 App.PropTypes = {
 }

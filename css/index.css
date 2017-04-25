@@ -53,7 +53,55 @@
 .formInputField {
     margin: 10px;
     margin-bottom: 25px;
+}
 
+.formInputField input{
+
+    border:none;
+    border-bottom:1px solid #757575;
+}
+
+.formInputField input:focus{
+    outline:none;
+}
+
+
+
+
+.formInputField label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+
+
+.bar{ 
+    position:relative; 
+    display:block; 
+   }
+
+.bar:before, .bar:after   {
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
 }
 
 .radioInput{
@@ -111,6 +159,23 @@ label {
 }
 
 .headerImage{
-    width: 700px;
-    height: 200px;
+    width: 720px;
+    
+}
+
+.viewImage{
+    width:180px;
+    height: 40px;
+}
+
+.eventTile{
+    width: 180px;
+    height: 180px;
+    border: 1px dotted grey;
+    border-radius: 4px;
+}
+
+.headerOverflow{
+    overflow: hidden;
+    max-height: 200px;
 }
