@@ -1,34 +1,119 @@
 var React = require('react');
+//var Datepicker = require('react-datepicker');
+import Datepicker from 'react-datepicker';
+import moment from 'moment';
 
-function EventView(props){
+class EventView extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            name: '',
+            type: 'bestellen',
+            cost: 2,
+            vegetarisch: false,
+            vegan: false,
+            nuts: false,
+            scharf: false,
+            comment: '',
+            startDate: moment(),
+            img: null,
+
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
+        this.handleTypeChange = this.handleTypeChange.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
+
+    }
+
+    handleChange(event){
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        this.setState({
+            [name]: value,
+        });
+    }
+
+    handleTimeChange(date){
+        this.setState({
+            startDate: date
+        })
+    }
+
+
+    handleTypeChange(event){
+        this.setState({type: event.target.value});
+    }
+
+    handleOptionChange(event){
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        this.setState({
+            [name]: value
+        });
+    }
+
+    render(){
         return(
             <div className="home-container">
+                {this.state.img ? 
+                <img src={this.state.img} alt='testimage' className='headerImage' /> : null}
                 <form className='eventForm'>
                     <div className="head">
-                        <input type='submit' value='Erstellen' className='btn-submit' />
-                        <Name />
+                        <input type='submit' defaultValue='Erstellen' className='btn-submit' />
+                        <Name 
+                        handleChange={this.handleChange}
+                        value={this.state.name}/>
                     </div>
-                    <Time />
-                    <Type />
-                    <Cost />
-                    <Options />
-                    <Comments />
-                    <Image />
-                    <Participants />
+                    
+                    <Time 
+                    selected={this.state.startDate}
+                    onChange={this.handleTimeChange}
+                    />
+                    
+                    <Type 
+                    type={this.state.type}
+                    handleTypeChange={this.handleTypeChange}/>
+
+                    <Cost 
+                    cost={this.state.cost}
+                    handleChange={this.handleChange} />
+
+                    <Options 
+                    vegetarisch = {this.vegetarisch}
+                    vegan={this.vegan}
+                    nuts={this.nuts}
+                    scharf={this.scharf}
+                    handleOptionChange = {this.handleOptionChange}/>
+
+                    <Comments 
+                    handleChange={this.handleChange}
+                    comment={this.state.comment}/>
+
+                    <Image 
+                    handleChange={this.handleChange}/>
+                    {/* <Participants 
+                    handleChange={this.handleChange}
+                    participants={this.state.participants}/> */}
                 </form>
             </div>
            
-        )
+        )}
 }
 
 function Name(props){
     return(
         <div className='formInputField'>
             <label>Gib deinem Event einen Namen</label><br />
-            <input type='text' 
-            value='value' 
-            className='textInput' 
-            placeholder='Gib deinem Event einen Namen' />
+            <input type='text'
+            name='name'
+            className='textInput'
+            value={props.value}
+            onChange={props.handleChange} 
+            />
         </div>
     )
 }
@@ -37,26 +122,39 @@ function Time(props){
     return(
         <div className='formInputField'>
             <label>Gib eine Zeit an</label><br />
-            <input type='text' 
-            value='value' 
-            className='textInput' 
-            placeholder='Platzhalter für Zeit' />
+            <Datepicker 
+            inline
+            selected={props.selected}
+            onChange={props.onChange}
+            dateFormat='DD/MM/YYYY' 
+            todayButton={'Heute'}/>
+            
         </div>
     )
 }
 
 function Type(props){
+    var value = ['bestellen', 'kochen'];
     return(
         <div className='formInputField'>
             <label>Bestellen oder kochen</label><br />
+
             <input type='radio' 
             name='type' 
             className='radioInput' 
-            value='bestellen' checked /> Bestellen <br />
+            value={value[0]}
+            checked={props.type === value[0] ? true : false}
+            onChange={props.handleTypeChange}
+            /> Bestellen <br />
+
             <input type='radio' 
             name='type' 
             className='radioInput' 
-            value='kochen' checked /> Selbst kochen <br />
+            value={value[1]}
+            checked={props.type === value[1] ? true : false}
+            onChange={props.handleTypeChange}
+             
+            /> Selbst kochen <br />
         </div>
     )
 }
@@ -64,12 +162,15 @@ function Type(props){
 function Cost(props){
     return(
         <div className='formInputField half-width'>
-            <label>Kosten</label><br />
-            <input type='number'
+            <label>Kosten in Euro</label><br />
+            <input 
+            type='number'
             name='cost' 
-            min='0' max='100' 
+            min='0' max='100'
+            step='0.50' 
             className='numberInput' 
-            value='2' /><p>Euro</p>
+            value={props.cost}
+            onChange={props.handleChange} />
         </div>
     )
 }
@@ -78,22 +179,30 @@ function Options(props){
     return(
         <div className='formInputField'>
             <label>Optionen</label><br />
+
             <input type='checkbox'
-            name='option1' 
-            className='optionInput' 
-            value='vegetarisch' /> Vegetarisch <br />
+            name='vegetarisch' 
+            className='optionInput'
+            checked={props.vegetarisch} 
+            onChange={props.handleOptionChange} /> Vegetarisch <br />
+
             <input type='checkbox'
-            name='option2' 
-            className='optionInput' 
-            value='vegan' /> Vegan <br />
+            name='vegan' 
+            className='optionInput'
+            checked={props.vegan} 
+            onChange={props.handleOptionChange} /> Vegan <br />
+
             <input type='checkbox'
-            name='option3' 
-            className='optionInput' 
-            value='nuts' /> Mit Nüssen <br />
+            name='nuts' 
+            className='optionInput'
+            checked={props.nuts} 
+            onChange={props.handleOptionChange} /> Mit Nüssen <br />
+
             <input type='checkbox'
-            name='option4' 
-            className='optionInput' 
-            value='scharf' /> Scharf <br />
+            name='scharf' 
+            className='optionInput'
+            checked={props.scharf} 
+            onChange={props.handleOptionChange} /> Scharf <br />
         </div>
     )
 }
@@ -102,7 +211,11 @@ function Comments(props){
     return(
         <div className='formInputField'>
             <label>Kommentare und Extrawünsche</label><br />
-            <textarea value='input' className='textInput'/>
+            <textarea 
+            name='comments'
+            value={props.comment} 
+            className='textInput' 
+            onChange={props.handleChange} />
         </div>
     )
 }
@@ -112,9 +225,9 @@ function Image(props){
         <div className='formInputField'>
             <label>Gib die URL zu einem Bild an</label><br />
             <input type='text' 
-            value='value' 
+            name='img' 
             className='textInput' 
-            placeholder='Gib deinem Event einen Namen' />
+            onChange={props.handleChange} />
         </div>
     )
 }
@@ -123,10 +236,11 @@ function Participants(props){
     return(
         <div className='formInputField'>
             <label>Wer nimmt alles teil?</label><br />
-            <input type='text' 
-            value='value' 
+            <input type='text'
+            name='participants' 
+            value={props.participants} 
             className='textInput' 
-            placeholder='Teilnehmer' />
+            />
         </div>
     )
 }
