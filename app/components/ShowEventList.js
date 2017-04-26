@@ -6,28 +6,37 @@ class ShowEventList extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            events: [1],
+            events: [],
         } 
-        this.onAdd = this.onAdd.bind(this);     
+        this.onAdd = this.onAdd.bind(this);
+        this.onKill = this.onKill.bind(this);     
     }
 
     onAdd(){
             this.setState({
-                events: this.state.events.push(this.state.events.length+1)
+                events: this.state.events.concat([this.state.events.length+1])
             })
-            console.log(this.state.events);
         }
+
+    onKill(event){
+        debugger;
+        console.log(event.target.key);
+        
+        this.setState({
+            events: this.state.events.splice([event.target.key-1],1)
+        })
+    }    
 
  render(){
      return(
-         <div>
+         <div className='eventList'>
              {this.state.events.map(function(eventId){
                  return (
-                 <EventView key={eventId} />
+                 <EventView key={eventId} onKill={this.onKill}/>
                  )
-             })}
+             }, this)}
              <div>
-                <button className='btn btn-add' onClick={this.onAdd}>Add new</button>
+                <button className='btn btn-add' onClick={this.onAdd}>Add new Event</button>
              </div>
         </div>
     )

@@ -3,6 +3,11 @@
     margin: 0 auto;
 }
 
+.eventList{
+    display: flex;
+  flex-direction: row;
+}
+
 .home-container{
     display: flex;
     flex-direction: column;
@@ -18,24 +23,27 @@
 }
 
 .btn {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: 4px;
 }
 .btn-add {
     border: 2px dotted grey;
     cursor: pointer;
     background: whitesmoke;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .btn-view {
-    border: 2px solid dodgerblue;
     cursor: pointer;
     background: lightblue;
-    margin-left: 20px;
-    margin-right: 20px;
+    width: 100px;
+    margin: 0 auto;
+    font-size: 16px;
+    text-transform: uppercase;
+    border: 0;
+    outline: none;
 }
 
 .btn-submit {
@@ -142,7 +150,7 @@ label {
 }
 
 .head{
-    background: #FF5252;
+    background: lightblue;
     color: white;
     margin: -10px;
     padding-bottom: 10px;
@@ -173,9 +181,14 @@ label {
     height: 180px;
     border: 1px dotted grey;
     border-radius: 4px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 5px;
+    overflow: hidden;
 }
 
 .headerOverflow{
     overflow: hidden;
     max-height: 200px;
 }
+

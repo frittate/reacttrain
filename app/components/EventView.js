@@ -15,7 +15,7 @@ class EventView extends React.Component{
             vegan: false,
             nuts: false,
             scharf: false,
-            comment: '',
+            comments: '',
             startDate: moment(),
             img: null,
 
@@ -73,22 +73,29 @@ class EventView extends React.Component{
     }
 
     render(){
+        var imgStyle = {
+            backgroundImage: 'url(' + this.state.img + ')',
+            backgroundSize: 'cover',
+        }
+
         if (this.state.visible === 'detail'){
         return(
-            <div className="home-container">
+            <div className='home-container'>
                 <div className='headerOverflow'>
                 {this.state.img ? 
                 <img src={this.state.img} alt='testimage' className='headerImage' /> : null}
                 </div>
                 <form className='eventForm' onSubmit={this.onSubmit}>
-                    <div className="head">
-                        <input type='submit' defaultValue='Erstellen' className='btn-submit'/>
+                    <div className='head'>
+                        <input type='submit' defaultValue={this.state.name === '' ? 'Erstellen' : 'Speichern'} className='btn-submit'/>
                         <Name 
                         handleChange={this.handleChange}
                         value={this.state.name}
                         />
                     </div>
                     
+                    <button onClick={this.props.onKill}>Delete Me!</button>
+
                     <Time 
                     selected={this.state.startDate}
                     onChange={this.handleTimeChange}
@@ -111,7 +118,7 @@ class EventView extends React.Component{
 
                     <Comments 
                     handleChange={this.handleChange}
-                    comment={this.state.comment}/>
+                    comments={this.state.comments}/>
 
                     <Image 
                     handleChange={this.handleChange}/>
@@ -123,13 +130,12 @@ class EventView extends React.Component{
            
         ) } else {
             return(
-                <div className='eventTile'>
-                    {this.state.img ? 
-                    <img src={this.state.img} alt='testimage' className='viewImage' /> : null}
+                <div className='eventTile' style={imgStyle}>
+                    
 
                     <p>{this.state.name}</p>
                     <p>{this.state.startDate.format('DD. MMM')}</p>
-                    <button onClick={this.onDetail}>Details anzeigen</button>
+                    <button onClick={this.onDetail} className='btn-view'>{this.state.name === '' ? 'Erstellen' : 'Details anzeigen'}</button>
                 </div>
             )
         }
@@ -248,7 +254,7 @@ function Comments(props){
             <label>Kommentare und Extrawünsche</label><br />
             <textarea 
             name='comments'
-            value={props.comment} 
+            value={props.comments} 
             className='textInput' 
             onChange={props.handleChange} />
         </div>
